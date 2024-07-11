@@ -54,7 +54,7 @@ export default function App() {
       addBotMessage("Hello " + userName + ". Remember to text 'Yes' when you're ready.");
     }
 
-    if(triviaNumber === 1 && (userText == "blue" || userText == "orange")) {
+    if(triviaNumber === 1 && correctAnswer(1, userText)) {
       addBotMessage("Correct!");
       setTriviaNumber(2);
       addBotMessage(QUESTION_BANK[2].text);
@@ -64,7 +64,7 @@ export default function App() {
       addBotMessage("Nope sorry. Please try again. If you want a hint, type 'hint'");
     }
 
-    if(triviaNumber === 2 && (userText == "percy jackson" || userText == "percy jackson and the olympians")) {
+    if(triviaNumber === 2 && correctAnswer(2, userText)) {
       addBotMessage("Correct!");
       setTriviaNumber(3);
       addBotMessage(QUESTION_BANK[3].text);
@@ -74,7 +74,7 @@ export default function App() {
       addBotMessage("Nope sorry. Please try again. If you want a hint, type 'hint'");
     }
 
-    if(triviaNumber === 3 && (userText == "tux")) {
+    if(triviaNumber === 3 && correctAnswer(3, userText)) {
       addBotMessage("Correct!");
       setTriviaNumber(4);
       addBotMessage("CONGRATS! YOU BEAT THE GAME");
@@ -113,3 +113,13 @@ console.error = (...args) => {
   if (/defaultProps/.test(args[0])) return;
   error(...args);
 };
+
+
+// Check if answer is in answer bank of given question
+function correctAnswer(questionNumber, userAnswer){
+  console.log(userAnswer);
+  console.log(QUESTION_BANK[questionNumber].answer);
+  return QUESTION_BANK[questionNumber].answer.find(
+    (answerElem) => answerElem == userAnswer
+  )
+}

@@ -14,7 +14,7 @@ const QUESTION_BANK = [
     {
         text: "Q3: What is the name of Cindy's dog?", 
         hint: "Hint: short for tuxedo", 
-        answer: ["Tux"]
+        answer: ["tux"]
     }
 ]
 
