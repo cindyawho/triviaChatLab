@@ -9,6 +9,7 @@ const CHATBOT_USER_OBJ = {
 
 export default function App() {
   const [messages, setMessages] = useState([]);
+  const [triviaNumber, setTriviaNumber] = useState(0);
 
   useEffect(() => {
     if (messages.length < 1) {
@@ -44,10 +45,18 @@ export default function App() {
     let userText = userMessages[0].text;
     // console.log("Recent user msg:", userText);
 
-    if(userText == "Yes"){
+    if(userText.toLowerCase() == "yes" && triviaNumber === 0){
       addBotMessage("Awesome! Q1: What is Cindy's favorite color?");
-    } else {
+      setTriviaNumber(1);
+    } else if(triviaNumber === 0) {
       addBotMessage("Hello " + userName + ". Remember to text 'Yes' when you're ready.");
+    }
+
+    if(triviaNumber === 1 && (userText.toLowerCase() == "blue" || userText.toLowerCase() == "orange")) {
+      addBotMessage("Correct!");
+      setTriviaNumber(2);
+    } else if(triviaNumber === 1) {
+      addBotMessage("Nope sorry");
     }
 
   };
