@@ -4,7 +4,7 @@ import { GiftedChat } from "react-native-gifted-chat";
 const CHATBOT_USER_OBJ = {
   _id: 2,
   name: "React Native Chatbot",
-  avatar: "https://loremflickr.com/140/140",
+  avatar: "https://media.istockphoto.com/id/1957053641/vector/cute-kawaii-robot-character-friendly-chat-bot-assistant-for-online-applications-cartoon.jpg?s=612x612&w=0&k=20&c=Uf7lcu3I_ZNQvjBWxlFenRX7FuG_PKVJ4y1Y11aTZUc=",
 };
 
 export default function App() {
@@ -39,14 +39,15 @@ export default function App() {
   };
 
   const respondToUser = (userMessages) => {
-    console.log(userMessages)
+    // console.log(userMessages)
+    let userName = userMessages[0].user.name;
     let userText = userMessages[0].text;
-    console.log("Recent user msg:", userText);
+    // console.log("Recent user msg:", userText);
 
     if(userText == "Yes"){
       addBotMessage("Awesome! Q1: What is Cindy's favorite color?");
     } else {
-      addBotMessage("Remember to text 'Yes' when you're ready.");
+      addBotMessage("Hello " + userName + ". Remember to text 'Yes' when you're ready.");
     }
 
   };
@@ -65,7 +66,7 @@ export default function App() {
       }}
       user={{
         _id: 1,
-        name: "Baker",
+        name: "Snap Scholar",
       }}
       renderUsernameOnMessage={true}
     />
