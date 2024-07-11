@@ -9,6 +9,7 @@ const CHATBOT_USER_OBJ = {
 
 export default function App() {
   const [messages, setMessages] = useState([]);
+  // const [hint, setHint] = useState("no");
   const [triviaNumber, setTriviaNumber] = useState(0);
 
   useEffect(() => {
@@ -55,8 +56,27 @@ export default function App() {
     if(triviaNumber === 1 && (userText.toLowerCase() == "blue" || userText.toLowerCase() == "orange")) {
       addBotMessage("Correct!");
       setTriviaNumber(2);
+      addBotMessage("Q2: What is Cindy's favorite book?");
+    } else if(triviaNumber === 1 && userText.toLowerCase() == "hint") {
+      addBotMessage("Hint: sky or pumpkin");
     } else if(triviaNumber === 1) {
-      addBotMessage("Nope sorry");
+      addBotMessage("Nope sorry. Please try again. If you want a hint, type 'hint'");
+    }
+
+    if(triviaNumber === 2 && (userText.toLowerCase() == "percy jackson" || userText.toLowerCase() == "percy jackson and the olympians")) {
+      addBotMessage("Correct!");
+      setTriviaNumber(3);
+      addBotMessage("Q3: What is the name of Cindy's dog?");
+    } else if(triviaNumber === 2) {
+      addBotMessage("Nope sorry. Please try again. Hint: you can say just type the character name");
+    }
+
+    if(triviaNumber === 3 && (userText.toLowerCase() == "tux")) {
+      addBotMessage("Correct!");
+      setTriviaNumber(4);
+      addBotMessage("CONGRATS! YOU BEAT THE GAME");
+    } else if(triviaNumber === 3) {
+      addBotMessage("Nope sorry. Please try again. Hint: short for tuxedo");
     }
 
   };
