@@ -15,6 +15,11 @@ const QUESTION_BANK = [
         text: "Q3: What is the name of Cindy's dog?", 
         hint: "Hint: short for tuxedo", 
         answer: ["tux"]
+    },
+    {
+        text: "Q4: What academy is Cindy in?", 
+        hint: "Hint: think computers, programming, coding, it starts with an E", 
+        answer: ["snap engineering academy", "snap engineering", "engineering", "engineer", "engineering academy", "sea"]
     }
 ]
 
