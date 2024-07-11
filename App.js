@@ -16,7 +16,7 @@ export default function App() {
     if (messages.length < 1) {
       // Add a "starting message" when chat UI first loads
       addBotMessage(
-        "Hello, welcome to simple trivia! Say 'Yes' when you're ready to play!"
+        "Hello, welcome to simple trivia! Say 'Start' when you're ready to play!"
       );
     }
   }, []);
@@ -48,11 +48,11 @@ export default function App() {
     let userText = userMessages[0].text.toLowerCase();
     // console.log("Recent user msg:", userText);
 
-    if(userText == "yes" && triviaNumber === 0){
+    if(userText == "start" && triviaNumber === 0){
       addBotMessage(QUESTION_BANK[1].text);
       setTriviaNumber(1);
     } else if(triviaNumber === 0) {
-      addBotMessage("Hello " + userName + ". Remember to text 'Yes' when you're ready.");
+      addBotMessage("Hello " + userName + ". Remember to text 'Start' when you're ready.");
     }
 
     if(triviaNumber > 0 && correctAnswer(triviaNumber, userText)) {
@@ -60,7 +60,10 @@ export default function App() {
       setTriviaNumber(triviaNumber+1);
       // console.log(triviaNumber, " : ", QUESTION_BANK.length);
       if(triviaNumber == QUESTION_BANK.length - 1){
-        addBotMessage("CONGRATS! YOU BEAT THE GAME");
+        addBotMessage("CONGRATS! YOU BEAT THE GAME!");
+        addBotMessage("Resetting....");
+        setTriviaNumber(0);
+        addBotMessage("Game is reset!");
       } else{
         addBotMessage(QUESTION_BANK[triviaNumber+1].text);
       }
