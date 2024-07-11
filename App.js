@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
+import QUESTION_BANK from './questionBank'
 
 const CHATBOT_USER_OBJ = {
   _id: 2,
@@ -9,7 +10,6 @@ const CHATBOT_USER_OBJ = {
 
 export default function App() {
   const [messages, setMessages] = useState([]);
-  // const [hint, setHint] = useState("no");
   const [triviaNumber, setTriviaNumber] = useState(0);
 
   useEffect(() => {
@@ -41,42 +41,47 @@ export default function App() {
   };
 
   const respondToUser = (userMessages) => {
+    // console.log(QUESTION_BANK);
     // console.log(userMessages)
     let userName = userMessages[0].user.name;
-    let userText = userMessages[0].text;
+    let userText = userMessages[0].text.toLowerCase();
     // console.log("Recent user msg:", userText);
 
-    if(userText.toLowerCase() == "yes" && triviaNumber === 0){
-      addBotMessage("Awesome! Q1: What is Cindy's favorite color?");
+    if(userText == "yes" && triviaNumber === 0){
+      addBotMessage(QUESTION_BANK[1].text);
       setTriviaNumber(1);
     } else if(triviaNumber === 0) {
       addBotMessage("Hello " + userName + ". Remember to text 'Yes' when you're ready.");
     }
 
-    if(triviaNumber === 1 && (userText.toLowerCase() == "blue" || userText.toLowerCase() == "orange")) {
+    if(triviaNumber === 1 && (userText == "blue" || userText == "orange")) {
       addBotMessage("Correct!");
       setTriviaNumber(2);
-      addBotMessage("Q2: What is Cindy's favorite book?");
-    } else if(triviaNumber === 1 && userText.toLowerCase() == "hint") {
-      addBotMessage("Hint: sky or pumpkin");
+      addBotMessage(QUESTION_BANK[2].text);
+    } else if(triviaNumber === 1 && userText == "hint") {
+      addBotMessage(QUESTION_BANK[1].hint);
     } else if(triviaNumber === 1) {
       addBotMessage("Nope sorry. Please try again. If you want a hint, type 'hint'");
     }
 
-    if(triviaNumber === 2 && (userText.toLowerCase() == "percy jackson" || userText.toLowerCase() == "percy jackson and the olympians")) {
+    if(triviaNumber === 2 && (userText == "percy jackson" || userText == "percy jackson and the olympians")) {
       addBotMessage("Correct!");
       setTriviaNumber(3);
-      addBotMessage("Q3: What is the name of Cindy's dog?");
+      addBotMessage(QUESTION_BANK[3].text);
+    } else if(triviaNumber === 2 && userText == "hint") {
+      addBotMessage(QUESTION_BANK[2].hint);
     } else if(triviaNumber === 2) {
-      addBotMessage("Nope sorry. Please try again. Hint: you can say just type the character name");
+      addBotMessage("Nope sorry. Please try again. If you want a hint, type 'hint'");
     }
 
-    if(triviaNumber === 3 && (userText.toLowerCase() == "tux")) {
+    if(triviaNumber === 3 && (userText == "tux")) {
       addBotMessage("Correct!");
       setTriviaNumber(4);
       addBotMessage("CONGRATS! YOU BEAT THE GAME");
+    } else if(triviaNumber === 3 && userText == "hint") {
+      addBotMessage(QUESTION_BANK[3].hint);
     } else if(triviaNumber === 3) {
-      addBotMessage("Nope sorry. Please try again. Hint: short for tuxedo");
+      addBotMessage("Nope sorry. Please try again. If you want a hint, type 'hint'");
     }
 
   };
