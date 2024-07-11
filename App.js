@@ -39,9 +39,16 @@ export default function App() {
   };
 
   const respondToUser = (userMessages) => {
-    console.log("Recent user msg:", userMessages[0].text);
+    console.log(userMessages)
+    let userText = userMessages[0].text;
+    console.log("Recent user msg:", userText);
 
-    // addBotMessage("I am da response!");
+    if(userText == "Yes"){
+      addBotMessage("Awesome! Q1: What is Cindy's favorite color?");
+    } else {
+      addBotMessage("Remember to text 'Yes' when you're ready.");
+    }
+
   };
 
   const onSend = useCallback((messages = []) => {
