@@ -42,6 +42,7 @@ export default function App() {
 
   const respondToUser = (userMessages) => {
     // console.log(QUESTION_BANK);
+    // console.log(QUESTION_BANK.length);
     // console.log(userMessages)
     let userName = userMessages[0].user.name;
     let userText = userMessages[0].text.toLowerCase();
@@ -54,35 +55,22 @@ export default function App() {
       addBotMessage("Hello " + userName + ". Remember to text 'Yes' when you're ready.");
     }
 
-    if(triviaNumber === 1 && correctAnswer(1, userText)) {
+    if(triviaNumber > 0 && correctAnswer(triviaNumber, userText)) {
       addBotMessage("Correct!");
-      setTriviaNumber(2);
-      addBotMessage(QUESTION_BANK[2].text);
-    } else if(triviaNumber === 1 && userText == "hint") {
-      addBotMessage(QUESTION_BANK[1].hint);
-    } else if(triviaNumber === 1) {
+      setTriviaNumber(triviaNumber+1);
+      // console.log(triviaNumber, " : ", QUESTION_BANK.length);
+      if(triviaNumber == QUESTION_BANK.length - 1){
+        addBotMessage("CONGRATS! YOU BEAT THE GAME");
+      } else{
+        addBotMessage(QUESTION_BANK[triviaNumber+1].text);
+      }
+    } 
+    else if(triviaNumber > 0 && userText == "hint") {
+      addBotMessage(QUESTION_BANK[triviaNumber].hint);
+    } 
+    else if(triviaNumber > 0) {
       addBotMessage("Nope sorry. Please try again. If you want a hint, type 'hint'");
-    }
-
-    if(triviaNumber === 2 && correctAnswer(2, userText)) {
-      addBotMessage("Correct!");
-      setTriviaNumber(3);
-      addBotMessage(QUESTION_BANK[3].text);
-    } else if(triviaNumber === 2 && userText == "hint") {
-      addBotMessage(QUESTION_BANK[2].hint);
-    } else if(triviaNumber === 2) {
-      addBotMessage("Nope sorry. Please try again. If you want a hint, type 'hint'");
-    }
-
-    if(triviaNumber === 3 && correctAnswer(3, userText)) {
-      addBotMessage("Correct!");
-      setTriviaNumber(4);
-      addBotMessage("CONGRATS! YOU BEAT THE GAME");
-    } else if(triviaNumber === 3 && userText == "hint") {
-      addBotMessage(QUESTION_BANK[3].hint);
-    } else if(triviaNumber === 3) {
-      addBotMessage("Nope sorry. Please try again. If you want a hint, type 'hint'");
-    }
+    } 
 
   };
 
@@ -117,8 +105,8 @@ console.error = (...args) => {
 
 // Check if answer is in answer bank of given question
 function correctAnswer(questionNumber, userAnswer){
-  console.log(userAnswer);
-  console.log(QUESTION_BANK[questionNumber].answer);
+  // console.log(userAnswer);
+  // console.log(QUESTION_BANK[questionNumber].answer);
   return QUESTION_BANK[questionNumber].answer.find(
     (answerElem) => answerElem == userAnswer
   )
